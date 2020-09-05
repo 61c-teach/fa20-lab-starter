@@ -53,7 +53,7 @@ main:
 # Just a simple function. Returns 1.
 #
 # FIXME Fix the reported error in this function (you can delete lines
-# if necessary, as long as the function still returns 1 in a0)
+# if necessary, as long as the function still returns 1 in a0).
 simple_fn:
     mv a0, t0
     li a0, 1
@@ -71,10 +71,9 @@ simple_fn:
 #     return s0;
 # }
 #
-# FIXME There's a CC error with this function, but it's not reported
-# by the CC checker! The big all-caps comments should give you a hint
-# about what's missing. Another hint: what does the "s" in "s0"
-# stand for?
+# FIXME There's a CC error with this function!
+# The big all-caps comments should give you a hint about what's
+# missing. Another hint: what does the "s" in "s0" stand for?
 naive_pow:
     # BEGIN PROLOGUE
     # END PROLOGUE
@@ -132,10 +131,10 @@ inc_arr_end:
 # It doesn't return anything.
 # C pseudocode for what it does: "*a0 = *a0 + 1"
 #
-# FIXME This function also violates calling convention, but it isn't
-# reported by the Venus CC checker because the function isn't exported
-# with the ".globl" keyword. You should fix the bug anyway by filling
-# in the prologue and epilogue as appropriate.
+# FIXME This function also violates calling convention, but it might not
+# be reported by the Venus CC checker (try and figure out why).
+# You should fix the bug anyway by filling in the prologue and epilogue
+# as appropriate.
 helper_fn:
     # BEGIN PROLOGUE
     # END PROLOGUE
