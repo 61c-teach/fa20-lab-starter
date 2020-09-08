@@ -5,7 +5,7 @@ CFLAGS=-ggdb -Wall -std=c99
 LDFLAGS=
 
 ifeq ($(UNAME_S), Darwin)
-    MEMCHECK=valgrind --tool=memcheck --leak-check=full --track-origins=yes --dsymutil=yes --suppressions=osx_vector.supp
+    MEMCHECK=valgrind --tool=memcheck --leak-check=full --track-origins=yes --dsymutil=yes
 endif
 
 ifeq ($(UNAME_S), Linux)
@@ -21,7 +21,7 @@ LFSR_PROG = lfsr
 VECTOR_OBJS=vector.o vector-test.o
 VECTOR_PROG=vector-test
 
-BINARIES=$(VECTOR_PROG) $(BIT_OPS_PROG) $(LFSR_PROG) 
+BINARIES=$(VECTOR_PROG) $(BIT_OPS_PROG) $(LFSR_PROG)
 
 all: $(BINARIES)
 
@@ -43,8 +43,8 @@ test_bit_ops.c: bit_ops.h
 vector-memcheck: $(VECTOR_PROG)
 	$(MEMCHECK) ./$(VECTOR_PROG)
 
-clean: 
+clean:
 	-rm -rf core *.o *~ "#"*"#" Makefile.bak $(BINARIES) *.dSYM
-        
+
 vector.c: vector.h
 vector-test.c: vector.h
