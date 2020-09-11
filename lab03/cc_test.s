@@ -141,8 +141,8 @@ helper_fn:
     lw t1, 0(a0)
     addi s0, t1, 1
     sw s0, 0(a0)
-    # BEGIN PROLOGUE
-    # END PROLOGUE
+    # BEGIN EPILOGUE
+    # END EPILOGUE
     ret
 
 # YOU CAN IGNORE EVERYTHING BELOW THIS COMMENT
