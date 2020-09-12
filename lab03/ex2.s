@@ -1,3 +1,5 @@
+.globl main
+
 .data
 source:
     .word   3
@@ -20,7 +22,20 @@ dest:
     .word   0
 
 .text
+fun:
+    addi t0, a0, 1
+    sub t1, x0, a0
+    mul a0, t0, t1
+    jr ra
+
 main:
+    # BEGIN PROLOGUE
+    addi sp, sp, -16
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    sw s2, 4(sp)
+    sw ra, 8(sp)
+    # END PROLOGUE
     addi t0, x0, 0
     addi s0, x0, 0
     la s1, source
@@ -34,7 +49,7 @@ loop:
     addi sp, sp, -8
     sw t0, 0(sp)
     sw t2, 4(sp)
-    jal square
+    jal fun
     lw t0, 0(sp)
     lw t2, 4(sp)
     addi sp, sp, 8
@@ -44,15 +59,13 @@ loop:
     add s0, s0, t2
     addi t0, t0, 1
     jal x0, loop
-square:
-    add t0, a0, x0
-    add t1, a0, x0
-    addi t0, t0, 1
-    addi t2, x0, -1
-    mul t1, t1, t2
-    mul a0, t0, t1
-    jr ra
 exit:
     add a0, x0, s0
-    add a1, x0, x0
-    ecall # Terminate ecall
+    # BEGIN EPILOGUE
+    lw s0, 0(sp)
+    lw s1, 4(sp)
+    lw s2, 4(sp)
+    lw ra, 8(sp)
+    addi sp, sp, 16
+    # END EPILOGUE
+    jr ra
