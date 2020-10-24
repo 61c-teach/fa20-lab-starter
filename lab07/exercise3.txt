@@ -1,0 +1,20 @@
+--- not autograded ---
+
+Part 1
+    blocksize = 20, n = 100: 
+    blocksize = 20, n = 1000: 
+    blocksize = 20, n = 2000: 
+    blocksize = 20, n = 5000: 
+    blocksize = 20, n = 10000: 
+
+    Checkoff Question 1:
+    Checkoff Question 2:
+
+Part 2
+    blocksize = 50, n = 10000:
+    blocksize = 100, n = 10000:
+    blocksize = 500, n = 10000:
+    blocksize = 1000, n = 10000:
+    blocksize = 5000, n = 10000:
+
+    Checkoff Question 3:
