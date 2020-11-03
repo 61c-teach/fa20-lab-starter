@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "common.h"
+#include "simd.h"
 
-/* ***DON'T MODIFY THIS FILE! ONLY MODIFY COMMON.C!*** */
+/* ***DON'T MODIFY THIS FILE! ONLY MODIFY SIMD.C!*** */
 
 int main(int argc, char* argv[]) {
 	printf("Let's generate a randomized array.\n");
