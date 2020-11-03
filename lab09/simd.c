@@ -1,62 +1,79 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
-#include "common.h"
+#include <stdio.h>
+#include <x86intrin.h>
+#include "simd.h"
 
-/* ***DON'T MODIFY THIS FILE! ONLY MODIFY COMMON.C!*** */
-
-int main(int argc, char* argv[]) {
-	printf("Let's generate a randomized array.\n");
-	unsigned int vals[NUM_ELEMS];
-	long long int reference;
-	long long int simd;
-	long long int simdu;
-	for(unsigned int i = 0; i < NUM_ELEMS; i++) vals[i] = rand() % 256;
-
-	printf("Starting randomized sum.\n");
+long long int sum(unsigned int vals[NUM_ELEMS]) {
 	clock_t start = clock();
-	reference = sum(vals);
+
+	long long int sum = 0;
+	for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+		for(unsigned int i = 0; i < NUM_ELEMS; i++) {
+			if(vals[i] >= 128) {
+				sum += vals[i];
+			}
+		}
+	}
 	clock_t end = clock();
-	printf("Sum: %lld\n", reference);
-	clock_t reft = end - start;
+	printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+	return sum;
+}
 
-	printf("Starting randomized unrolled sum.\n");
-	printf("Sum: %lld\n", sum_unrolled(vals));
+long long int sum_unrolled(unsigned int vals[NUM_ELEMS]) {
+	clock_t start = clock();
+	long long int sum = 0;
 
-	printf("Starting randomized SIMD sum.\n");
-	start = clock();
-	simd = sum_simd(vals);
-	end = clock();
-	printf("Sum: %lld\n", simd);
-	clock_t simdt = end - start;
+	for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+		for(unsigned int i = 0; i < NUM_ELEMS / 4 * 4; i += 4) {
+			if(vals[i] >= 128) sum += vals[i];
+			if(vals[i + 1] >= 128) sum += vals[i + 1];
+			if(vals[i + 2] >= 128) sum += vals[i + 2];
+			if(vals[i + 3] >= 128) sum += vals[i + 3];
+		}
 
-	if (simd != reference) {
-		printf("Test Failed! SIMD sum %lld doesn't match reference sum %lld!\n", simd, reference);
+		//This is what we call the TAIL CASE
+		//For when NUM_ELEMS isn't a multiple of 4
+		//NONTRIVIAL FACT: NUM_ELEMS / 4 * 4 is the largest multiple of 4 less than NUM_ELEMS
+		for(unsigned int i = NUM_ELEMS / 4 * 4; i < NUM_ELEMS; i++) {
+			if (vals[i] >= 128) {
+				sum += vals[i];
+			}
+		}
 	}
+	clock_t end = clock();
+	printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+	return sum;
+}
+
+long long int sum_simd(unsigned int vals[NUM_ELEMS]) {
+	clock_t start = clock();
+	__m128i _127 = _mm_set1_epi32(127);		// This is a vector with 127s in it... Why might you need this?
+	long long int result = 0;				   // This is where you should put your final result!
+	/* DO NOT DO NOT DO NOT DO NOT WRITE ANYTHING ABOVE THIS LINE. */
 	
-	if (reft <= simdt * 2) {
-		printf("Test Failed! SIMD sum provided less than 2X speedup.\n");
-	}
+	for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+		/* YOUR CODE GOES HERE */
 
-	printf("Starting randomized SIMD unrolled sum.\n");
-	start = clock();
-	simdu = sum_simd_unrolled(vals);
-	end = clock();
-	printf("Sum: %lld\n", simdu);
-	clock_t simdut = end - start;
+		/* You'll need a tail case. */
 
-	if (simdu != simd) {
-		printf("Test Failed! SIMD_UNROLLED sum %lld doesn't match reference sum %lld!\n", simdu, reference);
 	}
+	clock_t end = clock();
+	printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+	return result;
+}
 
-	if (simdt <= simdut) {
-		printf("Test Failed! SIMD unrolled function provided no speedup.\n");
-	}
+long long int sum_simd_unrolled(unsigned int vals[NUM_ELEMS]) {
+	clock_t start = clock();
+	__m128i _127 = _mm_set1_epi32(127);
+	long long int result = 0;
+	for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+		/* COPY AND PASTE YOUR sum_simd() HERE */
+		/* MODIFY IT BY UNROLLING IT */
 
-	if (simd == simdu && simdt >= simdut) {
-		printf("Tests Passed! Correct values were produced, and speedups were achieved!\n");
-		return 0;
-	} else {
-		return 1;
+		/* You'll need 1 or maybe 2 tail cases here. */
+
 	}
+	clock_t end = clock();
+	printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+	return result;
 }

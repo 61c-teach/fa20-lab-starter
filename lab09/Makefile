@@ -1,14 +1,14 @@
 CC=gcc
 CFLAGS=--std=c99 -Wall
 
-simd: simd.o common.o
-	$(CC) $(CFLAGS) -o simd simd.o common.o
+simd: test_simd.o simd.o
+	$(CC) $(CFLAGS) -o simd test_simd.o simd.o
 
-simd.o: simd.c common.h
+test_simd.o: simd.c simd.h
+	$(CC) $(CFLAGS) -c test_simd.c
+
+simd.o: simd.c simd.h
 	$(CC) $(CFLAGS) -c simd.c
-
-common.o: common.c common.h
-	$(CC) $(CFLAGS) -c common.c
 
 clean:
 	rm -f simd
