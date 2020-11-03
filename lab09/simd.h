@@ -4,7 +4,7 @@
 #include <x86intrin.h>
 
 #define NUM_ELEMS ((1 << 16) + 10)
-#define OUTER_ITERATIONS (1 << 16)
+#define OUTER_ITERATIONS (1 << 14)
 
 long long int sum(unsigned int vals[NUM_ELEMS]);
 
