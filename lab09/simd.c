@@ -3,7 +3,7 @@
 #include <x86intrin.h>
 #include "simd.h"
 
-long long int sum(unsigned int vals[NUM_ELEMS]) {
+long long int sum(int vals[NUM_ELEMS]) {
 	clock_t start = clock();
 
 	long long int sum = 0;
@@ -19,7 +19,7 @@ long long int sum(unsigned int vals[NUM_ELEMS]) {
 	return sum;
 }
 
-long long int sum_unrolled(unsigned int vals[NUM_ELEMS]) {
+long long int sum_unrolled(int vals[NUM_ELEMS]) {
 	clock_t start = clock();
 	long long int sum = 0;
 
@@ -45,7 +45,7 @@ long long int sum_unrolled(unsigned int vals[NUM_ELEMS]) {
 	return sum;
 }
 
-long long int sum_simd(unsigned int vals[NUM_ELEMS]) {
+long long int sum_simd(int vals[NUM_ELEMS]) {
 	clock_t start = clock();
 	__m128i _127 = _mm_set1_epi32(127);		// This is a vector with 127s in it... Why might you need this?
 	long long int result = 0;				   // This is where you should put your final result!
@@ -62,7 +62,7 @@ long long int sum_simd(unsigned int vals[NUM_ELEMS]) {
 	return result;
 }
 
-long long int sum_simd_unrolled(unsigned int vals[NUM_ELEMS]) {
+long long int sum_simd_unrolled(int vals[NUM_ELEMS]) {
 	clock_t start = clock();
 	__m128i _127 = _mm_set1_epi32(127);
 	long long int result = 0;
