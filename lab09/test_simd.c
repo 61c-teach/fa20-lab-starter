@@ -7,11 +7,12 @@
 
 int main(int argc, char* argv[]) {
 	printf("Let's generate a randomized array.\n");
-	unsigned int vals[NUM_ELEMS];
+	int vals[NUM_ELEMS];
 	long long int reference;
 	long long int simd;
 	long long int simdu;
-	for(unsigned int i = 0; i < NUM_ELEMS; i++) vals[i] = rand() % 256;
+	for (unsigned int i = 0; i < NUM_ELEMS; i++) vals[i] = rand() % 256;
+	int success = 0;
 
 	printf("Starting randomized sum.\n");
 	clock_t start = clock();
@@ -32,10 +33,12 @@ int main(int argc, char* argv[]) {
 
 	if (simd != reference) {
 		printf("Test Failed! SIMD sum %lld doesn't match reference sum %lld!\n", simd, reference);
+		success = 1;
 	}
 	
 	if (reft <= simdt * 2) {
 		printf("Test Failed! SIMD sum provided less than 2X speedup.\n");
+		success = 1;
 	}
 
 	printf("Starting randomized SIMD unrolled sum.\n");
@@ -45,16 +48,18 @@ int main(int argc, char* argv[]) {
 	printf("Sum: %lld\n", simdu);
 	clock_t simdut = end - start;
 
-	if (simdu != simd) {
+	if (simdu != reference) {
 		printf("Test Failed! SIMD_UNROLLED sum %lld doesn't match reference sum %lld!\n", simdu, reference);
+		success = 1;
 	}
 
 	if (simdt <= simdut) {
 		printf("Test Failed! SIMD unrolled function provided no speedup.\n");
+		success = 1;
 	}
 
-	if (simd == simdu && simdt >= simdut) {
-		printf("Tests Passed! Correct values were produced, and speedups were achieved!\n");
+	if (!success) {
+		printf("All tests Passed! Correct values were produced, and speedups were achieved!\n");
 		return 0;
 	} else {
 		return 1;
