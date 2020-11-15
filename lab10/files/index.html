@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>CS 61C is the best</title>
+    <style type="text/css">
+        html, body {
+            background-color: #2F4;
+            cursor: wait;
+            font: 24px 'Comic Sans MS', sans-serif;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+        marquee {
+            font: 72px serif;
+            background: black;
+            margin: 0;
+        }
+        .rainbow {
+            background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+            background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+            color:transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .site-navigation {
+            background: #00F;
+        }
+        .site-navigation a {
+            display: inline-block;
+            margin: 1em 3em;
+            color: #EEE;
+            text-decoration: none;
+        }
+        .site-navigation a:hover {
+            color: #F24;
+        }
+        .site-icon {
+            display: inline-block;
+            font-size: 144px;
+            line-height: 144px;
+        }
+        .site-content {
+            padding: 2em;
+        }
+        .site-content.var-pink {
+            background: #F6B;
+            color: #BF6;
+        }
+        .site-content.var-orange {
+            background: #FA0;
+            color: #518;
+        }
+        @-webkit-keyframes flashing {
+            from {
+                color: #F06;
+            }
+            to {
+                color: #60F;
+            }
+        }
+        @keyframes flashing {
+            from {
+                color: #F06;
+            }
+            to {
+                color: #60F;
+            }
+        }
+        .flashing {
+            -webkit-animation: flashing 0.2s linear infinite alternate;
+            -moz-animation: flashing 0.2s linear infinite alternate;
+            -ms-animation: flashing 0.2s linear infinite alternate;
+            -o-animation: flashing 0.2s linear infinite alternate;
+            animation: flashing 0.2s linear infinite alternate;
+        }
+        @keyframes rotating {
+            from {
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            to {
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        .rotating {
+            -webkit-animation: rotating 2s linear infinite;
+            -moz-animation: rotating 2s linear infinite;
+            -ms-animation: rotating 2s linear infinite;
+            -o-animation: rotating 2s linear infinite;
+            animation: rotating 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <marquee scrollamount="30">
+        <span class="rainbow">CS 61C IS THE BEST</span>
+    </marquee>
+    <h1 class="site-title flashing">WELCOME TO CS61C</h1>
+    <nav class="site-navigation">
+        <a href="">HOME</a>
+        <a href="./my_documents/">SEE MY FILES</a>
+    </nav>
+    <div class="site-content var-pink">
+        <p class="site-icon rotating">CS61C</p>
+    </div>
+    <footer class="site-content var-orange">
+        <p>Created with WEB 4.0 HTML6 CLOUD.</p>
+    </footer>
+</body>
+</html>
