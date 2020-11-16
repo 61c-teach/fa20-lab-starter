@@ -21,7 +21,7 @@ int main() {
 			v_add_optimized_adjacent(x,y,z);
 		run_time = omp_get_wtime() - start_time;
 	    if(!verify(x,y, v_add_optimized_adjacent)){
-	      printf("v_add optimized adjacent does not match reference\n");
+	      printf("v_add optimized adjacent does not match reference.\n");
 	      return -1; 
 	    }
 	    printf("Optimized adjacent: %d thread(s) took %f seconds\n",i,run_time);
@@ -35,7 +35,7 @@ int main() {
 			v_add_optimized_chunks(x,y,z);
 		run_time = omp_get_wtime() - start_time;
 	    if(!verify(x,y, v_add_optimized_chunks)){
-	      printf("v_add optimized chunks does not match oracle\n");
+	      printf("v_add optimized chunks does not match reference.\n");
 	      return -1; 
 	    }
 	    printf("Optimized chunks: %d thread(s) took %f seconds\n",i,run_time);
