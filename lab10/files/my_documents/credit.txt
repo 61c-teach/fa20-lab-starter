@@ -1,0 +1,5 @@
+Site designed by cs162 staff.
+http server modified from [cs162 hw4](https://cs162.eecs.berkeley.edu/static/hw/hw4.pdf)
+[libbmp](https://github.com/marc-q/libbmp)
+
+Content in this folder introduced by alice.
