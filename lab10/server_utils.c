@@ -84,6 +84,8 @@ void http_serve_directory(int socket_fd,  char *path) {
    char buf[256];
 
    http_make_header(socket_fd, "text/html", 200, -1);
+   char* start = "<ul>";
+   http_send_string(socket_fd, start);
 
    while ((ent = readdir(dir)) != NULL) {
       fname = ent->d_name;
