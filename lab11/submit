@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+rm -rf outputs
+mkdir outputs
+spark-submit perWordDocumentCount.py seqFiles/billOfRights.txt.seq
+mv spark-wc-out-perWordDocumentCount/part-00000 outputs/perWordDocumentCount
+
+spark-submit createIndices.py seqFiles/complete-works-mark-twain.txt.seq
+cat spark-wc-out-createIndices/part-00000 | grep Mark | less > outputs/createIndices
+
+spark-submit mostPopular.py seqFiles/billOfRights.txt.seq
+mv spark-wc-out-mostPopular/part-00000 outputs/mostPopular
